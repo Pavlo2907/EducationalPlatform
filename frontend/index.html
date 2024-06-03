@@ -1,0 +1,36 @@
+<!-- frontend/index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Educational Platform</title>
+</head>
+<body>
+  <h1>Welcome to Educational Platform</h1>
+  <div id="subjectsList"></div>
+  <div id="achievements"></div>
+
+  <script>
+    window.onload = async () => {
+      const response = await fetch('http://localhost:3000/subjects');
+      const subjects = await response.json();
+      const subjectsList = document.getElementById('subjectsList');
+      subjects.forEach(subject => {
+        const subjectDiv = document.createElement('div');
+        subjectDiv.textContent = subject.name;
+        subjectsList.appendChild(subjectDiv);
+      });
+
+      const achievementsResponse = await fetch('http://localhost:3000/achievements');
+      const achievements = await achievementsResponse.json();
+      const achievementsDiv = document.getElementById('achievements');
+      achievements.forEach(achievement => {
+        const achievementDiv = document.createElement('div');
+        achievementDiv.textContent = achievement.name;
+        achievementsDiv.appendChild(achievementDiv);
+      });
+    };
+  </script>
+</body>
+</html>
